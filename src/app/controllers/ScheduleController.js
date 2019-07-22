@@ -5,9 +5,11 @@ import Appointments from '../models/Appointments';
 
 class ScheduleController {
   async index(req, res) {
-    const checkUserProvider = User.findOne({
+    const checkUserProvider = await User.findOne({
       where: { id: req.userId, provider: true },
     });
+
+    console.log(checkUserProvider);
 
     if (!checkUserProvider) {
       res.status(400).json({ error: 'User is not a provider' });
